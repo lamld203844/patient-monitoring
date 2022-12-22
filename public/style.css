@@ -70,6 +70,7 @@ body {
     text-transform: capitalize;
     font-size: 15px;
     padding: 10px 19px;
+    margin-bottom: 10px;
     cursor: pointer
 }
 
@@ -95,8 +96,8 @@ body {
 }
 
 
-.btn-google {
-        color: #545454;
+.btn-login {
+    color: #545454;
     background-color: #ffffff;
     box-shadow: 0 1px 2px 1px #ddd;
 }
@@ -119,4 +120,8 @@ body {
     flex-grow: 1;
     margin: 0 15px;
     text-align: center;
+}
+
+.auth-logo {
+    width: 20px;
 }

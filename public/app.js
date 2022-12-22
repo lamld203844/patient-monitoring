@@ -14,6 +14,7 @@ firebase.initializeApp(firebaseConfig);
 // create instance of firebase auth
 const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
+const providerMS = new firebase.auth.OAuthProvider('microsoft.com');
 
 const notSignInView = document.querySelector('#notSignInView');
 const login = document.querySelector('#login');
@@ -41,6 +42,14 @@ async function loginEmailPassword(event){
 }
 
 const loginGoogle = async () => auth.signInWithPopup(provider)
+    .then(result => {
+        console.log('Successfully login');
+        console.log(result);
+    })
+    .catch(error => console.log(error));
+
+// In progress
+const loginMicrosoft = async () => auth.signInWithPopup(providerMS)
     .then(result => {
         console.log('Successfully login');
         console.log(result);
@@ -122,6 +131,7 @@ document.querySelector('form').onsubmit = loginEmailPassword;
 document.querySelector('#btnSignInGoogle').onclick = loginGoogle;
 document.querySelector('#signOutBtn').onclick = signOut;
 document.querySelector('#btnSignUp').onclick = signUp;
+document.querySelector('#btnSignInMicrosoft').onclick = loginMicrosoft;
 notSignIn()
 
 monitorAuthState();
