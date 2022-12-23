@@ -13,8 +13,12 @@ firebase.initializeApp(firebaseConfig);
 
 // create instance of firebase auth
 const auth = firebase.auth();
+// Instance of Google provider object
 const provider = new firebase.auth.GoogleAuthProvider();
+// Instance of MS provider object
 const providerMS = new firebase.auth.OAuthProvider('microsoft.com');
+// Instance of Facebook provider object
+const providerFb = new firebase.auth.FacebookAuthProvider();;
 
 const notSignInView = document.querySelector('#notSignInView');
 const login = document.querySelector('#login');
@@ -49,12 +53,20 @@ const loginGoogle = async () => auth.signInWithPopup(provider)
     .catch(error => console.log(error));
 
 // In progress
-const loginMicrosoft = async () => auth.signInWithPopup(providerMS)
+const loginMicrosoft = () => {
+    alert('Log in with Microsoft is in developing');
+}
+
+const loginFacebook = async () => auth.signInWithPopup(providerFb)
     .then(result => {
-        console.log('Successfully login');
+        console.log('Successfully login with Facebook');
         console.log(result);
     })
     .catch(error => console.log(error));
+
+const loginGithub = () => {
+    alert('Log in with Github is in developing');
+}
     
 // auth state changing
 const monitorAuthState = async () => {
@@ -128,10 +140,12 @@ const signUp = async () => {
 
 }
 document.querySelector('form').onsubmit = loginEmailPassword;
-document.querySelector('#btnSignInGoogle').onclick = loginGoogle;
 document.querySelector('#signOutBtn').onclick = signOut;
 document.querySelector('#btnSignUp').onclick = signUp;
+document.querySelector('#btnSignInGoogle').onclick = loginGoogle;
 document.querySelector('#btnSignInMicrosoft').onclick = loginMicrosoft;
+document.querySelector('#btnSignInFacebook').onclick = loginFacebook;
+document.querySelector('#btnSignInGithub').onclick = loginGithub;
 notSignIn()
 
 monitorAuthState();
