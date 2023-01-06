@@ -4,11 +4,15 @@ const firebaseConfig = {
     // TODO: Add your our config here
     apiKey: "AIzaSyAAjpj33sBpAmqCsDJJx1Ukyg6c2K8g-eA",
     authDomain: "iomtproject.firebaseapp.com",
+    
+    // The value of `databaseURL` depends on the location of the database
     databaseURL: "https://iomtproject-default-rtdb.asia-southeast1.firebasedatabase.app",
+    
     projectId: "iomtproject",
     messagingSenderId: "859589064748",
     appId: "1:859589064748:web:64b1607da25b9a091df989",
 };
+
 firebase.initializeApp(firebaseConfig);
 
 // create instance of firebase auth
@@ -57,12 +61,15 @@ const loginMicrosoft = () => {
     alert('Log in with Microsoft is in developing');
 }
 
-const loginFacebook = async () => auth.signInWithPopup(providerFb)
-    .then(result => {
-        console.log('Successfully login with Facebook');
-        console.log(result);
-    })
-    .catch(error => console.log(error));
+// const loginFacebook = async () => auth.signInWithPopup(providerFb)
+//     .then(result => {
+//         console.log('Successfully login with Facebook');
+//         console.log(result);
+//     })
+//     .catch(error => console.log(error));
+const loginFacebook = () => {
+    alert('Log in with Facebook is in developing');
+}
 
 const loginGithub = () => {
     alert('Log in with Github is in developing');
@@ -149,3 +156,21 @@ document.querySelector('#btnSignInGithub').onclick = loginGithub;
 notSignIn()
 
 monitorAuthState();
+
+
+//// Real time database ////
+
+// Initialize Realtime Database and get a reference to the service
+const db = firebase.database();
+
+// Read data //
+function readData() {
+    const ref = db.ref('MPU/AccX')
+    ref.on('value', snapshot => {
+        const data = snapshot.val();
+        const mpuData = document.querySelector('#acceleration');
+        mpuData.innerHTML = data;
+    })
+}
+
+readData()
