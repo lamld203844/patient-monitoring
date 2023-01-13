@@ -24,3 +24,46 @@ export const showSignupError = (error) => {
         signupErrorMessage.innerHTML = '<p>Invalid credential for signing up</p>'
     }
 }
+
+// Get JSON data
+//     for each key
+//         if exist
+//             modify
+//         else    
+//             create a new one and append
+export const updateList = (list) => {
+
+// for each key
+//     if existed
+//         modify
+//     else    
+//         create a new one and append
+
+    // get all key of list
+    const keys = Object.keys(list)
+    // for each key
+    keys.forEach(key => {
+        const id = document.querySelector(`#${key}`);
+        // if element existed -> modify
+        if (id) {
+            id.innerHTML = `${list[key]}`
+        } else {
+            // create a card
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.setAttribute('style', 'width: 20rem;')
+
+            // add content to card
+            const content = `
+            <div class='card-body'>
+            <h5>${key}</h5>
+            <p id ="${key}" class='card-text'>${list[key]}</p>
+            </div>`
+            card.innerHTML = content;
+
+            // append card to given div
+            const div = document.querySelector('#raw-data');
+            div.append(card);                
+        }
+    }); 
+}

@@ -164,12 +164,12 @@ monitorAuthState();
 const db = firebase.database();
 
 // Read data //
-function readData() {
-    const ref = db.ref('MPU/AccX')
-    ref.on('value', snapshot => {
+const readData = async () => {
+    const ref = db.ref('MPU/')
+    await ref.on('value', snapshot => {
         const data = snapshot.val();
-        const mpuData = document.querySelector('#acceleration');
-        mpuData.innerHTML = data;
+        console.log(data);
+        ui.updateList(data)
     })
 }
 
