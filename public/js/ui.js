@@ -1,4 +1,5 @@
 import { AuthErrorCodes } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js"
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 const loginErrorMessage = document.querySelector('#loginErrorMessage');
 const signupErrorMessage = document.querySelector('#signupErrorMessage');
@@ -27,14 +28,14 @@ export const showSignupError = (error) => {
 
 // Get JSON data
 //     for each key
-//         if exist
+//         if existed (being update)
 //             modify
 //         else    
 //             create a new one and append
 export const updateList = (list) => {
 
 // for each key
-//     if existed
+//     if existed (being update)
 //         modify
 //     else    
 //         create a new one and append
@@ -66,4 +67,33 @@ export const updateList = (list) => {
             div.append(card);                
         }
     }); 
+}
+
+export const drawBarChart = (list) => {
+    console.log('Draw bar chart')
+    console.log(list);
+
+    const svg =  d3.select("#svg")
+
+    const svgHeight = svg.node().clientHeight;
+    const svgWidth = svg.node().clientWidth;
+
+    const dataset = Object.values(list)
+
+    svg.selectAll('rect')
+    .data(dataset)
+    .enter()
+    .append('rect')
+    .attr('x', (d,i) => i*(svgWidth/ dataset.length))
+    .attr('y', d => svgHeight - d*4)
+    .attr('width', 20)
+    .attr('height', d => d*100)
+
+    svg.selectAll('text')
+    .data(dataset)
+    .enter()
+    .append('text')
+    .text(d => d)
+    .attr('x', (d,i) => i*(svgWidth/ dataset.length))
+    .attr('y', d => (svgHeight- d*4));
 }

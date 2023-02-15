@@ -173,4 +173,15 @@ const readData = async () => {
     })
 }
 
+// Read data and visualize (bar chart) //
+const readAndVisualizeData = async () => {
+    const ref = db.ref('dataForChart/')
+    await ref.on('value', snapshot => {
+        const data = snapshot.val();
+        console.log(data);
+        ui.drawBarChart(data)
+    })
+}
+
 readData()
+readAndVisualizeData()
